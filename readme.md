@@ -1,5 +1,5 @@
 Step 1: first Run front and backend with Volume and network
-1. git clone 
+1. git clone https://github.com/vishswati1011/docker-multicontainer.git
 2. mongodb://localhost:27017/course-goals
 3. docker run  --name mongodb --rm -d -p 27017:27017 mongo
 3. docker build -t backend .   
