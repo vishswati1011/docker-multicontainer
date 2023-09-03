@@ -1,0 +1,46 @@
+version: "3.9"
+services:
+  mongodb:
+    image: 'mongo'
+    volumes:
+      - data:/data/db
+    # container_name: mongodb  //your customer container name you can give
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME: max
+    #   - MONGO_INITDB_ROOT_PASSWORD: secret 
+    # env_file:
+    #   - ./env/mongo.env 
+  backend:
+    build: ./backend
+    # build: 
+    #   context: ./backend
+    #   dockerfile: dockerfile
+    # agrs:
+    #   some-arg:
+    ports:
+      - '8000:8000'
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app    # path for bing mount 
+      - /app/node_modules
+    # env-file:
+    #   - ./env/backend.env
+    depends_on:
+      - mongodb    
+  frontend:
+    build: ./frontend
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend/src:/app/src
+    stdin_open: true    
+    tty: true
+    depends_on:
+      - backend
+
+# name volume need to sepecify
+volumes:
+  data:
+  logs:  
+  # bind mount not need to sepecify here
+
