@@ -1,12 +1,12 @@
-Step 1:first Run Frontend and backend with volumen and network
-1. git clone 
+Step 1: first Run front and backend with Volume and network
+1. git clone https://github.com/vishswati1011/docker-multicontainer.git
 2. mongodb://localhost:27017/course-goals
 3. docker run  --name mongodb --rm -d -p 27017:27017 mongo
 3. docker build -t backend .   
 4. docker build -t frontend .
 5. docker run --name backend_c --rm backend
-6. you will fetch mongodb localhost error
-7. which can be solve using mongodb://host.docker.internal:27017/course-goals
+6. You will fetch mongodb localhost error
+7. which can be solved using mongodb://host.docker.internal:27017/course-goals
 
    but it is not the solution because if we use host.docker.internal then the frontend is not able to talk backend because backend running on container and not publishing any port
 
@@ -14,7 +14,7 @@ Step 1:first Run Frontend and backend with volumen and network
 
 9. now run the frontend 
    docker run --name frontend_c --rm -p 3000:3000 -it frontend 
-   Now the frontend is connected with backend and api accessing using localhost:8000 post but backend and mongodb running with container
+   Now the frontend is connected with backend and api accessing using localhost:8000 post but the backend and mongodb running with container
 
 STEP 2: 
 10. create the network to communicate between container 
@@ -23,7 +23,7 @@ STEP 2:
 11. And then run the mongodb container with network
     $docker run --name mongodb -d --network goal-net mongo 
     And now if we are using container we should change hoat.docker.internal to mongodb with the mongo container name 
-    Same are in the frontend we need to changes the api routes which is till then using localhost:8000 now it will run 
+    Same are in the frontend we need to changes the api routes which are till then using localhost:8000 now it will run 
     http://backend_c/goals
 12. Now rebuild the images of backend and frontend and try to run the container
     For frontend cmd:
